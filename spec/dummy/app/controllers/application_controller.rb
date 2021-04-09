@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  include ActiveRecord::Userstamp::ControllerAdditions
+  include Userstamp::ControllerConcern
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.

@@ -1,4 +1,7 @@
  # Changelog
+ ## 4.0.0 (09-04-2021)
+  * Priit Tark        - Rails 6.1 support
+
  ## 3.0.5 (22-8-2017)
   * Jonathan Putney   - Support Rails 5.0.
   * Joel Low          - Add additional combinations to Travis build matrix.

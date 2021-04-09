@@ -31,7 +31,7 @@ RSpec.describe 'Migration helpers', type: :model do
 
   context 'when overridden attribute names are used' do
     before(:each) do
-      ActiveRecord::Userstamp.configure do |config|
+      Userstamp.configure do |config|
         config.creator_attribute = :created_by
         config.updater_attribute = :updated_by
         config.deleter_attribute = :deleted_by
@@ -41,7 +41,7 @@ RSpec.describe 'Migration helpers', type: :model do
       end
     end
     after(:each) do
-      ActiveRecord::Userstamp.configure do |config|
+      Userstamp.configure do |config|
         config.creator_attribute = :creator_id
         config.updater_attribute = :updater_id
         config.deleter_attribute = :deleter_id
