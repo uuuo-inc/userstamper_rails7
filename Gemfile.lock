@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    userstamp (4.0.0)
+    userstamper (4.0.1)
       rails (>= 6)
 
 GEM
@@ -216,7 +216,7 @@ DEPENDENCIES
   rspec-rails (>= 3.3)
   simplecov
   sqlite3
-  userstamp!
+  userstamper!
 
 BUNDLED WITH
    2.1.4

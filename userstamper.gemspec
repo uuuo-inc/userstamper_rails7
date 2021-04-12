@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |s|
   s.name = 'userstamper'
-  s.version = '4.0.0'
+  s.version = '4.0.1'
   s.authors = ['Joel Low', 'Priit Tark']
   s.email = ['joel@joelsplace.sg', 'priit@gitlab.eu']
 
