@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
 
   s.summary = 'Adds magic creator and updater attributes to your ActiveRecord models.'
   s.description = 'This gem extends ActiveRecord::Base to add automatic updating of created_by and updated_by attributes of your models in much the same way that the ActiveRecord::Timestamp module updates created_(at/on) and updated_(at/on) attributes.'
-  s.homepage = 'https://github.com/gitlabeu/userstamp'
+  s.homepage = 'https://github.com/gitlabeu/userstamper'
   s.license  = 'MIT'
 
   s.files         = `git ls-files`.split("\n")
