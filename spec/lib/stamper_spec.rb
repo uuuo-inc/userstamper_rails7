@@ -4,14 +4,14 @@ RSpec.describe 'Stamper' do
   describe '.model_stamper' do
     it 'can only be included once' do
       expect(User.singleton_class.included_modules.count(
-        Userstamp::Stamper::InstanceMethods)).to eq(1)
+        Userstamper::Stamper::InstanceMethods)).to eq(1)
 
       User.class_eval do
         stamper
       end
 
       expect(User.singleton_class.included_modules.count(
-        Userstamp::Stamper::InstanceMethods)).to eq(1)
+        Userstamper::Stamper::InstanceMethods)).to eq(1)
     end
   end
 

@@ -1,4 +1,4 @@
-module Userstamp::Configuration
+module Userstamper::Configuration
   # !@attribute [r] default_stamper
   #   Determines the default model used to stamp other models.
   #
@@ -37,13 +37,4 @@ module Userstamp::Configuration
   #   By default, this is set to +:updater_id+.
   mattr_accessor :updater_attribute
   self.updater_attribute = :updater_id
-
-  # !@attribute [rw] deleter_attribute
-  #   Determines the name of the column in the database which stores the name of the deleter.
-  #
-  #   Override the attribute by using the stampable class method within a model.
-  #
-  #   By default, this is set to +:deleter_id+.
-  mattr_accessor :deleter_attribute
-  self.deleter_attribute = :deleter_id
 end

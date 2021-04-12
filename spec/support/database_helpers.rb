@@ -30,8 +30,6 @@ RSpec.configure do |config|
         t.column :created_on,     :datetime
         t.column :updater_id,     :integer
         t.column :updated_at,     :datetime
-        t.column :deleter_id,     :integer
-        t.column :deleted_at,     :datetime
       end
 
       # Comments are created and updated by People
@@ -43,8 +41,6 @@ RSpec.configure do |config|
         t.column :created_at,     :datetime
         t.column :updated_by,     :integer
         t.column :updated_at,     :datetime
-        t.column :deleted_by,     :integer
-        t.column :deleted_at,     :datetime
       end
 
       create_table :tags, force: true do |t|

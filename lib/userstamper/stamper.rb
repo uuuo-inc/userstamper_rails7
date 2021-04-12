@@ -1,11 +1,11 @@
-module Userstamp::Stamper
+module Userstamper::Stamper
   extend ActiveSupport::Concern
 
   module ClassMethods
     def model_stamper
       # don't allow multiple calls
       return if singleton_class.included_modules.include?(InstanceMethods)
-      extend Userstamp::Stamper::InstanceMethods
+      extend Userstamper::Stamper::InstanceMethods
     end
   end
 

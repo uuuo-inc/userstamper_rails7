@@ -1,10 +1,9 @@
-module Userstamp::MigrationConcern
+module Userstamper::MigrationConcern
   extend ActiveSupport::Concern
 
   def userstamps(*args)
-    config = Userstamp.config
+    config = Userstamper.config
     column(config.creator_attribute, :integer, *args)
     column(config.updater_attribute, :integer, *args)
-    column(config.deleter_attribute, :integer, *args) if config.deleter_attribute.present?
   end
 end

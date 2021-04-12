@@ -1,7 +1,7 @@
 # Extends the stamping functionality of ActiveRecord by automatically recording the model
-# responsible for creating, updating, and deleting the current object. See the +Stamper+ and
+# responsible for creating, updating the current object. See the +Stamper+ and
 # +ControllerAdditions+ modules for further documentation on how the entire process works.
-module Userstamp::Stampable
+module Userstamper::Stampable
   extend ActiveSupport::Concern
 
   included do
@@ -15,8 +15,6 @@ module Userstamp::Stampable
     before_validation :set_creator_attribute, on: :create, if: :record_userstamp
     before_save :set_updater_attribute, if: :record_userstamp
     before_create :set_creator_attribute, if: :record_userstamp
-
-    before_destroy :set_deleter_attribute, if: :record_userstamp
   end
 
   module ClassMethods
@@ -31,14 +29,9 @@ module Userstamp::Stampable
     # This method customizes how the gem functions. For example:
     #
     #   class Post < ActiveRecord::Base
-    #     stampable stamper_class_name: Person.name,
-    #               with_deleted:       true
+    #     stampable stamper_class_name: Person.name
     #   end
     #
-    # The method will set up all the associations. Extra arguments (like +:with_deleted+) will be
-    # propagated to the associations.
-    #
-    # By default, the deleter association is not defined unless the :deleter_attribute is set in
     # the gem configuration.
     def stampable(options = {})
       self.stamper_class_name = options.delete(:stamper_class_name) if options.key?(:stamper_class_name)
@@ -67,26 +60,21 @@ module Userstamp::Stampable
 
     private
 
-    # Defines the associations for Userstamp.
+    # Defines the associations for Userstamper.
     def add_userstamp_associations(options)
       @stamper_initialized = true
-      Userstamp::Utilities.remove_association(self, :creator)
-      Userstamp::Utilities.remove_association(self, :updater)
-      Userstamp::Utilities.remove_association(self, :deleter)
+      Userstamper::Utilities.remove_association(self, :creator)
+      Userstamper::Utilities.remove_association(self, :updater)
 
-      associations = Userstamp::Utilities.available_association_columns(self)
+      associations = Userstamper::Utilities.available_association_columns(self)
       return if associations.nil?
 
-      config = Userstamp.config
+      config = Userstamper.config
       klass = stamper_class.try(:name)
       relation_options = options.reverse_merge(class_name: klass)
 
       belongs_to :creator, relation_options.reverse_merge(foreign_key: config.creator_attribute, required: false) if associations.first
       belongs_to :updater, relation_options.reverse_merge(foreign_key: config.updater_attribute, required: false) if associations.second
-
-      if associations.third
-        belongs_to :deleter, relation_options.reverse_merge(foreign_key: config.deleter_attribute, required: false)
-      end
     end
   end
 
@@ -103,7 +91,7 @@ module Userstamp::Stampable
     return unless creator_association
     return if creator.present?
 
-    Userstamp::Utilities.assign_stamper(self, creator_association)
+    Userstamper::Utilities.assign_stamper(self, creator_association)
   end
 
   def set_updater_attribute
@@ -113,16 +101,6 @@ module Userstamp::Stampable
     return unless updater_association
     return if !new_record? && !changed?
 
-    Userstamp::Utilities.assign_stamper(self, updater_association)
-  end
-
-  def set_deleter_attribute
-    return unless has_stamper?
-
-    deleter_association = self.class.reflect_on_association(:deleter)
-    return unless deleter_association
-
-    Userstamp::Utilities.assign_stamper(self, deleter_association)
-    save
+    Userstamper::Utilities.assign_stamper(self, updater_association)
   end
 end

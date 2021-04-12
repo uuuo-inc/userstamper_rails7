@@ -21,30 +21,23 @@ RSpec.describe 'Migration helpers', type: :model do
         expect(subject.has_attribute?(:updater_id)).to be true
         expect(subject.class.columns.find {|c| c.name == 'updater_id' }.null).to be false
       end
-
-      it 'has a deleter_id association' do
-        expect(subject.has_attribute?(:deleter_id)).to be true
-        expect(subject.class.columns.find {|c| c.name == 'deleter_id' }.null).to be false
-      end
     end
   end
 
   context 'when overridden attribute names are used' do
     before(:each) do
-      Userstamp.configure do |config|
+      Userstamper.configure do |config|
         config.creator_attribute = :created_by
         config.updater_attribute = :updated_by
-        config.deleter_attribute = :deleted_by
       end
       class self.class::OverriddenRandom < ActiveRecord::Base
         stampable
       end
     end
     after(:each) do
-      Userstamp.configure do |config|
+      Userstamper.configure do |config|
         config.creator_attribute = :creator_id
         config.updater_attribute = :updater_id
-        config.deleter_attribute = :deleter_id
       end
     end
 
@@ -61,10 +54,6 @@ RSpec.describe 'Migration helpers', type: :model do
 
       it 'has an updated_by attribute' do
         expect(subject.has_attribute?(:updated_by)).to be true
-      end
-
-      it 'has a deleted_by attribute' do
-        expect(subject.has_attribute?(:deleted_by)).to be true
       end
     end
   end

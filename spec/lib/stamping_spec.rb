@@ -210,24 +210,6 @@ RSpec.describe 'Stamping', type: :model do
     end
   end
 
-  context 'when destroying a Post' do
-    context 'when the stamper is an ID' do
-      it 'sets the deleter' do
-        expect(@first_post.deleted_at).to be_nil
-
-        Person.stamper = @nicole.id
-        expect(Person.stamper).to eq(@nicole.id)
-
-        @first_post.destroy
-        @first_post.save
-        @first_post.reload
-
-        expect(@first_post.deleted_at).to be_present
-        expect(@first_post.deleter_id).to eq(@nicole.id)
-      end
-    end
-  end
-
   context 'when using a generated model' do
     it 'does not query the model on the columns' do
       class self.class::Post2 < Post
@@ -248,14 +230,6 @@ RSpec.describe 'Stamping', type: :model do
         end
       end
       expect(post_3_class.table_name).not_to be_empty
-    end
-  end
-
-  context 'when a deleter attribute is specified' do
-    it 'creates a deleter relation' do
-      expect(@first_post.respond_to?('creator')).to eq(true)
-      expect(@first_post.respond_to?('updater')).to eq(true)
-      expect(@first_post.respond_to?('deleter')).to eq(true)
     end
   end
 end

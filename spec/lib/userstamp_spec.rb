@@ -1,4 +1,4 @@
 require 'rails_helper'
 
-RSpec.describe Userstamp do
+RSpec.describe Userstamper do
 end
