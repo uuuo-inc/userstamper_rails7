@@ -9,7 +9,8 @@ method is used in models that are responsible for creating or updating other obj
 Typically this would be the `User` model of your application. The `stampable` method is used in 
 models that are subject to being created or updated by stampers.
 
-Gem is tested with Ruby 2.7.2, 2.7.3 and Rails 6.1.3.1
+Gem was latest tested with Ruby 3.1.3 and Rails 7.0.3
+In history the gem has been tested with Ruby 2.7.2, 2.7.3 and Rails 6.1.3.1.
 
 ## Features
 to result in a `belongs_to` relation which looks like:
@@ -140,3 +141,4 @@ In addition to these, some ideas are cherry picked from the following forks:
  - [Thomas von Deyen](https://github.com/tvdeyen)
  - [Joel Low](http://joelsplace.sg)
  - [Priit Tark](https://github.com/priit)
+ - [Carsten Reinke](https://github.com/reinkcar)

@@ -1,4 +1,7 @@
  # Changelog
+ ## 4.1.0 (03-01-2023)
+  * Carsten Reinke    - Ruby 3.1 support
+
  ## 4.0.0 (09-04-2021)
   * Priit Tark        - Rails 6.1 support and renamed gem to userstamper
 
